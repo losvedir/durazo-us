@@ -1,0 +1,7 @@
+Build with hugo.
+
+Test with
+
+```
+hugo server --buildDrafts --theme=mine --verbose
+```

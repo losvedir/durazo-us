@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Gabriel Durazo | Software Developer</title>
+        <meta name="description" content="The personal web site of Gabe Durazo. Contact information, and blog posts mostly about tech and travel">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/site.css">
+        <style>
+/*          body{
+            margin:0;
+            padding:0;
+          }
+          canvas{
+            position:absolute;
+            left:0;
+            top:0;
+            z-index:0;
+            border:0;
+          }
+          .all-content{
+            position:absolute;
+            z-index:1;
+            left:0;
+            top:0;
+            width:100%;
+          }*/
+        </style>
+    </head>
+    <body>
+        <!-- <canvas id="myCanvas" width="1000" height="1000"></canvas> -->
+        <div class="all-content">
+            <div class="contact-sidebar">
+                <img width="200px" src="/img/me.jpg">
+                <h2>Gabriel Durazo</h2>
+                <ul>
+                    <li>Email: <a href="mailto:gabe@durazo.us">gabe@durazo.us</a></li>
+                    <li>Cell: <a href="tel:14242424262">42 42 42 42 62</a></li>
+                    <li>Twitter: <a href="https://twitter.com/losvedir">@losvedir</a></li>
+                    <li>HN: <a href="https://news.ycombinator.com/user?id=losvedir">losvedir</a></li>
+                    <li><a href="https://www.linkedin.com/in/gabedurazo">LinkedIn</a></li>
+                </ul>
+                <h2>Read Stuff</h2>
+                <h3>Posts</h3>
+                <ul>
+                    {{ range .Data.Pages }}
+                        {{ if eq .Type "posts"}}
+                            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+
+                <h3>Travels</h3>
+                <ul>
+                    {{ range .Data.Pages }}
+                        {{ if eq .Type "travels"}}
+                            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </div>
+            <div class="main-content">
+                <h1>Welcome</h1>
+                <p>
+                    Hi! I’m a Ruby on Rails developer in Boston, MA. I’m a Co-Founder and lead engineer at CoachUp. I graduated from MIT in ‘08 with degrees in Econ and Math+CS. I did a 2.5 year stint in finance — sell-side equity research, passing my Series 7, 63, 86, and 87 tests — before returning to my true passion of coding things people love to use.
+                </p>
+                <p>
+                    I’m active in Boston’s burgeoning start-up community, having gone through MassChallenge and TechStars Boston.
+                </p>
+            </div>
+        </div>
+
+        <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+        </script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+        <script type="text/javascript">
+            function draw() {
+                var c=document.getElementById("myCanvas");
+                var ctx=c.getContext("2d");
+                for(x=0;x<200;x++) {
+                    for(y=0;y<200;y++) {
+                        i=0;
+                        cx=-2+x/50;
+                        cy=-2+y/50;
+                        zx=0;
+                        zy=0;
+
+                        do {
+                            xt=zx*zy;
+                            zx=zx*zx-zy*zy+cx;
+                            zy=2*xt+cy;
+                            i++;
+                        } while(i<255&&(zx*zx+zy*zy)<4);
+
+                        color=i.toString(16);
+                        ctx.beginPath();
+                        ctx.rect(x*4, y*4, 4, 4);
+                        ctx.fillStyle ='#'+color+color+color;
+                        ctx.fill();
+                    }
+                }
+                window.requestAnimationFrame(draw);
+            }
+
+            // window.requestAnimationFrame(draw)
+        </script>
+    </body>
+</html>
