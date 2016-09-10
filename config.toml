@@ -1,7 +1,6 @@
 baseurl = "https://gabe.durazo.us/"
 languageCode = "en-us"
 title = "Gabe Durazo"
-languageCode = "en-us"
 copyright = "This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License."
 [author]
     name = "Gabe Durazo"
