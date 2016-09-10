@@ -6,106 +6,97 @@
         <title>Gabriel Durazo | Software Developer</title>
         <meta name="description" content="The personal web site of Gabe Durazo. Contact information, and blog posts mostly about tech and travel">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/site.css">
+        {{ if .RSSlink }}
+          <link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+          <link href="{{ .RSSlink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+        {{ end }}
         <style>
-/*          body{
-            margin:0;
-            padding:0;
-          }
-          canvas{
-            position:absolute;
-            left:0;
-            top:0;
-            z-index:0;
-            border:0;
-          }
-          .all-content{
-            position:absolute;
-            z-index:1;
-            left:0;
-            top:0;
-            width:100%;
-          }*/
+            html{font-family:Georgia,Times,serif; font-size:18px;}
+            pre,code{font-family: monaco, 'Consolas', monospace;}
+            body{padding:0;margin:0;}
+            p{font-size:1.0rem; line-height:1.6rem; margin-top:0px; margin-bottom:1rem;}
+            ul{padding-left:0rem;list-style-type: none}
+            li{line-height:1rem;margin-bottom:0.6rem;padding:0;}
+            a{text-decoration: none;}
+
+            .home-about{background-color: #def; margin:0; padding:15px;}
+            .home-about h1{margin-top:0;}
+            .home-content{margin:0; padding:15px;}
+            .contact-element{display:inline-block;width:100px;text-align:right;margin-right:5px;}
+
+            @media(min-width:700px){
+                h1{font-size:3.0rem; line-height:3.0rem; margin-bottom:1.5rem; margin-top:0.5rem;}
+                h2{font-size:1.8rem; line-height:2.0rem; margin-bottom:1.0rem; margin-top:2.0rem;}
+                h3{font-size:1.2rem; line-height:1.2rem; margin-bottom:0.8rem; margin-top:2.0rem;}
+                h4,h5,h6,h7{font-size:1rem;line-height:1rem;margin:0;}
+            }
+
+            @media(min-width:900px){
+                .constrain-width{max-width:900px;margin:0 auto;}
+            }
         </style>
     </head>
     <body>
-        <!-- <canvas id="myCanvas" width="1000" height="1000"></canvas> -->
-        <div class="all-content">
-            <div class="contact-sidebar">
-                <img width="200px" src="/img/me.jpg">
-                <h2>Gabriel Durazo</h2>
-                <ul>
-                    <li>Email: <a href="mailto:gabe@durazo.us">gabe@durazo.us</a></li>
-                    <li>Cell: <a href="tel:14242424262">42 42 42 42 62</a></li>
-                    <li>Twitter: <a href="https://twitter.com/losvedir">@losvedir</a></li>
-                    <li>HN: <a href="https://news.ycombinator.com/user?id=losvedir">losvedir</a></li>
-                    <li><a href="https://www.linkedin.com/in/gabedurazo">LinkedIn</a></li>
-                </ul>
-                <h2>Read Stuff</h2>
-                <h3>Posts</h3>
-                <ul>
-                    {{ range .Data.Pages }}
-                        {{ if eq .Type "posts"}}
-                            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
-                        {{ end }}
-                    {{ end }}
-                </ul>
+        <div class="home-container">
+            <section class="home-about">
+                <div class="constrain-width">
+                    <h1>Gabriel Durazo</h1>
+                    <p>
+                        I'm co-founder and tech lead at <a href="https://www.coachup.com">CoachUp</a>, a
+                        venture-backed startup in Boston. My passion is building stuff that people love to use.
+                        I have expertise in Ruby on Rails, React, and Postgres, and an interest in Elixir and Rust.
+                        I have a double major in Math and Econ from MIT.
+                        I've passed FINRA Series 7, 63, 86, and 87 from a former life in finance.
+                    </p>
+                    <h3>Get in touch</h3>
+                    <ul class="get-in-touch">
+                        <li><span class="contact-element">Email:</span> <a href="mailto:gabe@durazo.us">gabe@durazo.us</a></li>
+                        <li><span class="contact-element">Cell:</span> <a href="tel:14242424262">42 42 42 42 62</a></li>
+                        <li><span class="contact-element">GitHub:</span> <a href="https://github.com/losvedir">losvedir</a></li>
+                        <li><span class="contact-element">Twitter:</span> <a href="https://twitter.com/losvedir">@losvedir</a></li>
+                        <li><span class="contact-element">HN:</span> <a href="https://news.ycombinator.com/user?id=losvedir">losvedir</a></li>
+                        <li><span class="contact-element">LinkedIn:</span> <a href="https://www.linkedin.com/in/gabedurazo">gabedurazo</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section class="home-content">
+                <div class="constrain-width">
+                    <h2>Writings</h2>
 
-                <h3>Travels</h3>
-                <ul>
-                    {{ range .Data.Pages }}
-                        {{ if eq .Type "travels"}}
-                            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                    <h3>Tech</h3>
+                    <ul>
+                        {{ range .Data.Pages }}
+                            {{ if eq .Type "tech"}}
+                                <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                            {{ end }}
                         {{ end }}
-                    {{ end }}
-                </ul>
-            </div>
-            <div class="main-content">
-                <h1>Welcome</h1>
-                <p>
-                    Hi! I’m a Ruby on Rails developer in Boston, MA. I’m a Co-Founder and lead engineer at CoachUp. I graduated from MIT in ‘08 with degrees in Econ and Math+CS. I did a 2.5 year stint in finance — sell-side equity research, passing my Series 7, 63, 86, and 87 tests — before returning to my true passion of coding things people love to use.
-                </p>
-                <p>
-                    I’m active in Boston’s burgeoning start-up community, having gone through MassChallenge and TechStars Boston.
-                </p>
-            </div>
+                    </ul>
+
+                    <h3>Travels</h3>
+                    <ul>
+                        {{ range .Data.Pages }}
+                            {{ if eq .Type "travels"}}
+                                <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                            {{ end }}
+                        {{ end }}
+                    </ul>
+
+                    <h3>Random</h3>
+                    <ul>
+                        {{ range .Data.Pages }}
+                            {{ if eq .Type "posts"}}
+                                <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                            {{ end }}
+                        {{ end }}
+                    </ul>
+                </div>
+            </section>
         </div>
 
         <script>
             window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+            ga('create','UA-9796114-1','auto');ga('send','pageview')
         </script>
         <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-        <script type="text/javascript">
-            function draw() {
-                var c=document.getElementById("myCanvas");
-                var ctx=c.getContext("2d");
-                for(x=0;x<200;x++) {
-                    for(y=0;y<200;y++) {
-                        i=0;
-                        cx=-2+x/50;
-                        cy=-2+y/50;
-                        zx=0;
-                        zy=0;
-
-                        do {
-                            xt=zx*zy;
-                            zx=zx*zx-zy*zy+cx;
-                            zy=2*xt+cy;
-                            i++;
-                        } while(i<255&&(zx*zx+zy*zy)<4);
-
-                        color=i.toString(16);
-                        ctx.beginPath();
-                        ctx.rect(x*4, y*4, 4, 4);
-                        ctx.fillStyle ='#'+color+color+color;
-                        ctx.fill();
-                    }
-                }
-                window.requestAnimationFrame(draw);
-            }
-
-            // window.requestAnimationFrame(draw)
-        </script>
     </body>
 </html>

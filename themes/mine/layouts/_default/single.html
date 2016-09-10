@@ -6,7 +6,46 @@
         <title>{{ .Title }}</title>
         <meta name="description" content="The personal web site of Gabe Durazo. Contact information, and blog posts mostly about tech and travel">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/site.css">
+        <style>
+            html{font-family:Georgia,Times,serif; font-size:18px;}
+            pre,code{font-family: monaco, 'Consolas', monospace;}
+            body{padding:0;margin:0;}
+            a{text-decoration: none;}
+
+            @media(min-width:900px){
+              .all-content{display:flex;max-width:1200px;margin:0 auto;}
+              .contact-sidebar{flex:0 0 250px;padding:25px;margin:0;}
+              .main-content{flex:1 1 0;padding:25px;margin:0;width:100%;min-width: 0;}
+              .mobile-header{display:none;}
+
+              h1{font-size:3.0rem; line-height:3.0rem; margin-bottom:1.5rem; margin-top:0.5rem;}
+              h2{font-size:1.8rem; line-height:2.0rem; margin-bottom:1.0rem; margin-top:2.0rem;}
+              h3{font-size:1.2rem; line-height:1.2rem; margin-bottom:0.8rem; margin-top:2.0rem;}
+              h4,h5,h6,h7{font-size:1rem;line-height:1rem;margin:0;}
+              p {font-size:1.0rem; line-height:1.6rem; margin-top:0px; margin-bottom:1rem;}
+              #my-name{font-size:1.5rem;line-height:1.6rem;font-weight:bold;margin-bottom:1rem;}
+
+              ul{padding-left:0;list-style-type: none}
+
+              .main-content img { width:100%; }
+              .main-content pre{max-width:950px;overflow-x: auto; overflow-wrap: normal;padding:0.5em; background-color: #eee}
+              .main-content blockquote{max-width:950px;overflow-x:auto;}
+
+              .contact-sidebar{background-color: #def; font-size:0.8rem;}
+              .about-blurb{line-height:1rem;font-style: italic; text-align: justify; width:100%;margin-bottom:1rem;margin-top:1rem;}
+              .contact-sidebar .other-writings li {margin-bottom:0.5rem;}
+              .contact-element{display:inline-block;width:80px; text-align:right;margin-right:5px;}
+            }
+
+            @media(max-width:899px){
+              #my-name{font-size:1.5rem;font-weight:bold}
+              .contact-sidebar{display:none;}
+              p{font-size:1.0rem; line-height:1.6rem; margin-top:0px; margin-bottom:1rem;}
+              .mobile-header{background-color: #def; color:#000; padding: 15px;}
+              .main-content{padding: 0 15px;}
+              .main-content img { width:100%; }
+            }
+        </style>
     </head>
     <body>
         <div class="all-content">
@@ -14,8 +53,8 @@
                 <span id="my-name">Gabriel Durazo</span> - <a href="/">Home</a>
             </div>
             <div class="contact-sidebar">
-                <div id="my-name">Gabriel Durazo</div>
-                <img src="/img/me.jpg">
+                <div id="my-name"><a href="/">Gabriel Durazo</a></div>
+
                 <div class="about-blurb">
                     I'm co-founder and tech lead at <a href="https://www.coachup.com">CoachUp</a>, a
                     venture-backed startup in Boston. My passion is building stuff that people love to use.
@@ -24,27 +63,38 @@
                     Passed FINRA Series 7, 63, 86, and 87 from a former life in finance.
                 </div>
                 <ul class="contact-info">
-                    <li>Email: <a href="mailto:gabe@durazo.us">gabe@durazo.us</a></li>
-                    <li>Cell: <a href="tel:14242424262">42 42 42 42 62</a></li>
-                    <li>Twitter: <a href="https://twitter.com/losvedir">@losvedir</a></li>
-                    <li>HN: <a href="https://news.ycombinator.com/user?id=losvedir">losvedir</a></li>
-                    <li><a href="https://www.linkedin.com/in/gabedurazo">LinkedIn</a></li>
+                    <li><span class="contact-element">Email:</span> <a href="mailto:gabe@durazo.us">gabe@durazo.us</a></li>
+                    <li><span class="contact-element">Cell:</span> <a href="tel:14242424262">42 42 42 42 62</a></li>
+                    <li><span class="contact-element">GitHub:</span> <a href="https://github.com/losvedir">losvedir</a></li>
+                    <li><span class="contact-element">Twitter:</span> <a href="https://twitter.com/losvedir">@losvedir</a></li>
+                    <li><span class="contact-element">HN:</span> <a href="https://news.ycombinator.com/user?id=losvedir">losvedir</a></li>
+                    <li><span class="contact-element">LinkedIn:</span> <a href="https://www.linkedin.com/in/gabedurazo">gabedurazo</a></li>
                 </ul>
 
                 <div class="other-writings">
-                    <h3>Posts</h3>
+                    <h3>Writings</h3>
+                    <h4>Tech</h4>
                     <ul>
                         {{ range .Site.Pages }}
-                            {{ if eq .Type "posts"}}
+                            {{ if eq .Type "tech"}}
                                 <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
                             {{ end }}
                         {{ end }}
                     </ul>
 
-                    <h3>Travels</h3>
+                    <h4>Travels</h4>
                     <ul>
                         {{ range .Site.Pages }}
                             {{ if eq .Type "travels"}}
+                                <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                            {{ end }}
+                        {{ end }}
+                    </ul>
+
+                    <h4>Posts</h4>
+                    <ul>
+                        {{ range .Site.Pages }}
+                            {{ if eq .Type "posts"}}
                                 <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
                             {{ end }}
                         {{ end }}
@@ -55,12 +105,16 @@
             <div class="main-content">
                 {{ .Content }}
                 <hr>
-                <p>{{ .Date.Format "Mon, Jan 2, 2006" }}</p>
+                <p>
+                    {{ .Date.Format "Mon, Jan 2, 2006" }}
+                    |
+                    For updates <a href="https://twitter.com/losvedir">follow me on twitter</a>
+                </p>
             </div>
         </div>
         <script>
             window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+            ga('create','UA-9796114-1','auto');ga('send','pageview')
         </script>
         <script src="https://www.google-analytics.com/analytics.js" async defer></script>
     </body>

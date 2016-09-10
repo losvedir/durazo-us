@@ -22,7 +22,6 @@ body{padding:0;margin:0;}
   .main-content blockquote{max-width:950px;overflow-x:auto;}
 
   .contact-sidebar{background-color: #def; font-size:0.8rem;}
-  .contact-sidebar img{width:100%;border-radius: 2px;border:1px solid #aaa;}
   .about-blurb{line-height:1rem;font-style: italic; text-align: justify; width:100%;margin-bottom:1rem;margin-top:1rem;}
   .contact-sidebar .other-writings li {margin-bottom:0.5rem;}
 }
