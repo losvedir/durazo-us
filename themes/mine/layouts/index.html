@@ -6,9 +6,9 @@
         <title>Gabriel Durazo | Software Developer</title>
         <meta name="description" content="The personal web site of Gabe Durazo. Contact information, and blog posts mostly about tech and travel">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {{ if .RSSlink }}
-          <link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
-          <link href="{{ .RSSlink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+        {{ with .OutputFormats.Get "RSS" }}
+          <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+          <link href="{{ .RelPermalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
         {{ end }}
         <style>
             html{font-family:Georgia,Times,serif; font-size:18px;}
@@ -65,7 +65,7 @@
 
                     <h3>Tech</h3>
                     <ul>
-                        {{ range .Data.Pages }}
+                        {{ range .Site.RegularPages }}
                             {{ if eq .Type "tech"}}
                                 <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
                             {{ end }}
@@ -74,7 +74,7 @@
 
                     <h3>Travels</h3>
                     <ul>
-                        {{ range .Data.Pages }}
+                        {{ range .Site.RegularPages }}
                             {{ if eq .Type "travels"}}
                                 <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
                             {{ end }}
@@ -83,7 +83,7 @@
 
                     <h3>Random</h3>
                     <ul>
-                        {{ range .Data.Pages }}
+                        {{ range .Site.RegularPages }}
                             {{ if eq .Type "posts"}}
                                 <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
                             {{ end }}
